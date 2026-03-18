@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 340" width="780" height="340">
+  <style>
+    /* Each panel is hidden by default, shown in turn via keyframes */
+    .panel { opacity: 0; }
+
+    .panel-1 { animation: show-1 12s step-start infinite; }
+    .panel-2 { animation: show-2 12s step-start infinite; }
+    .panel-3 { animation: show-3 12s step-start infinite; }
+
+    @keyframes show-1 { 0%,100%{opacity:1} 33.4%,99.9%{opacity:0} }
+    @keyframes show-2 { 0%,33.3%{opacity:0} 33.4%,66.6%{opacity:1} 66.7%,100%{opacity:0} }
+    @keyframes show-3 { 0%,66.6%{opacity:0} 66.7%,99.9%{opacity:1} 100%{opacity:0} }
+
+    /* Active tab indicator cycling */
+    .tab-bg-1 { animation: tab-active-1 12s step-start infinite; }
+    .tab-bg-2 { animation: tab-active-2 12s step-start infinite; }
+    .tab-bg-3 { animation: tab-active-3 12s step-start infinite; }
+
+    @keyframes tab-active-1 { 0%,100%{fill:#2563eb} 33.4%,99.9%{fill:#334155} }
+    @keyframes tab-active-2 { 0%,33.3%{fill:#334155} 33.4%,66.6%{fill:#2563eb} 66.7%,100%{fill:#334155} }
+    @keyframes tab-active-3 { 0%,66.6%{fill:#334155} 66.7%,99.9%{fill:#2563eb} 100%{fill:#334155} }
+
+    .tab-txt-1 { animation: tabtext-1 12s step-start infinite; }
+    .tab-txt-2 { animation: tabtext-2 12s step-start infinite; }
+    .tab-txt-3 { animation: tabtext-3 12s step-start infinite; }
+
+    @keyframes tabtext-1 { 0%,100%{fill:#fff;font-weight:bold} 33.4%,99.9%{fill:#94a3b8;font-weight:normal} }
+    @keyframes tabtext-2 { 0%,33.3%{fill:#94a3b8;font-weight:normal} 33.4%,66.6%{fill:#fff;font-weight:bold} 66.7%,100%{fill:#94a3b8;font-weight:normal} }
+    @keyframes tabtext-3 { 0%,66.6%{fill:#94a3b8;font-weight:normal} 66.7%,99.9%{fill:#fff;font-weight:bold} 100%{fill:#94a3b8;font-weight:normal} }
+
+    text { font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace; font-size: 13px; }
+    .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 13px; }
+    .comment { fill: #6a9955; }
+    .keyword { fill: #569cd6; }
+    .fn      { fill: #dcdcaa; }
+    .string  { fill: #ce9178; }
+    .var     { fill: #9cdcfe; }
+    .num     { fill: #b5cea8; }
+    .type    { fill: #4ec9b0; }
+    .plain   { fill: #d4d4d4; }
+    .dim     { fill: #858585; }
+  </style>
+
+  <!-- Card background -->
+  <rect width="780" height="340" rx="10" fill="#1e1e1e"/>
+
+  <!-- ── TAB BAR ── -->
+  <rect x="0" y="0" width="780" height="42" rx="10" fill="#252526"/>
+  <rect x="0" y="32" width="780" height="10" fill="#252526"/>
+
+  <!-- Tab 1: Python -->
+  <rect class="tab-bg-1" x="8"   y="6" width="110" height="30" rx="5"/>
+  <text class="label tab-txt-1" x="63"  y="26" text-anchor="middle">🐍 Python</text>
+
+  <!-- Tab 2: JavaScript -->
+  <rect class="tab-bg-2" x="124" y="6" width="130" height="30" rx="5"/>
+  <text class="label tab-txt-2" x="189" y="26" text-anchor="middle">🟨 JavaScript</text>
+
+  <!-- Tab 3: Go -->
+  <rect class="tab-bg-3" x="260" y="6" width="80"  height="30" rx="5"/>
+  <text class="label tab-txt-3" x="300" y="26" text-anchor="middle">🐹 Go</text>
+
+  <!-- Cycling label (bottom-right corner) -->
+  <text class="label dim" x="770" y="330" text-anchor="end">auto-cycling every 4 s</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PANEL 1 – Python                        -->
+  <!-- ═══════════════════════════════════════ -->
+  <g class="panel panel-1">
+    <text class="comment" x="20" y="72">  # Fibonacci sequence</text>
+    <text x="20" y="92">
+      <tspan class="keyword">def </tspan><tspan class="fn">fibonacci</tspan><tspan class="plain">(</tspan><tspan class="var">n</tspan><tspan class="plain">: </tspan><tspan class="type">int</tspan><tspan class="plain">) -&gt; </tspan><tspan class="type">list</tspan><tspan class="plain">[</tspan><tspan class="type">int</tspan><tspan class="plain">]:</tspan>
+    </text>
+    <text x="20" y="112">
+      <tspan class="plain">    </tspan><tspan class="var">a</tspan><tspan class="plain">, </tspan><tspan class="var">b</tspan><tspan class="plain"> = </tspan><tspan class="num">0</tspan><tspan class="plain">, </tspan><tspan class="num">1</tspan>
+    </text>
+    <text x="20" y="132">
+      <tspan class="plain">    </tspan><tspan class="var">result</tspan><tspan class="plain"> = []</tspan>
+    </text>
+    <text x="20" y="152">
+      <tspan class="keyword">    while </tspan><tspan class="var">a</tspan><tspan class="plain"> &lt; </tspan><tspan class="var">n</tspan><tspan class="plain">:</tspan>
+    </text>
+    <text x="20" y="172">
+      <tspan class="plain">        </tspan><tspan class="var">result</tspan><tspan class="plain">.</tspan><tspan class="fn">append</tspan><tspan class="plain">(</tspan><tspan class="var">a</tspan><tspan class="plain">)</tspan>
+    </text>
+    <text x="20" y="192">
+      <tspan class="plain">        </tspan><tspan class="var">a</tspan><tspan class="plain">, </tspan><tspan class="var">b</tspan><tspan class="plain"> = </tspan><tspan class="var">b</tspan><tspan class="plain">, </tspan><tspan class="var">a</tspan><tspan class="plain"> + </tspan><tspan class="var">b</tspan>
+    </text>
+    <text x="20" y="212">
+      <tspan class="keyword">    return </tspan><tspan class="var">result</tspan>
+    </text>
+    <text x="20" y="248">
+      <tspan class="fn">print</tspan><tspan class="plain">(</tspan><tspan class="fn">fibonacci</tspan><tspan class="plain">(</tspan><tspan class="num">100</tspan><tspan class="plain">))</tspan>
+    </text>
+    <text x="20" y="285">
+      <tspan class="comment">  # Output: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]</tspan>
+    </text>
+  </g>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PANEL 2 – JavaScript                    -->
+  <!-- ═══════════════════════════════════════ -->
+  <g class="panel panel-2">
+    <text class="comment" x="20" y="72">  // Fibonacci sequence</text>
+    <text x="20" y="92">
+      <tspan class="keyword">function </tspan><tspan class="fn">fibonacci</tspan><tspan class="plain">(</tspan><tspan class="var">n</tspan><tspan class="plain">) {</tspan>
+    </text>
+    <text x="20" y="112">
+      <tspan class="keyword">  const </tspan><tspan class="var">result</tspan><tspan class="plain"> = [];</tspan>
+    </text>
+    <text x="20" y="132">
+      <tspan class="keyword">  let </tspan><tspan class="plain">[</tspan><tspan class="var">a</tspan><tspan class="plain">, </tspan><tspan class="var">b</tspan><tspan class="plain">] = [</tspan><tspan class="num">0</tspan><tspan class="plain">, </tspan><tspan class="num">1</tspan><tspan class="plain">];</tspan>
+    </text>
+    <text x="20" y="152">
+      <tspan class="keyword">  while </tspan><tspan class="plain">(</tspan><tspan class="var">a</tspan><tspan class="plain"> &lt; </tspan><tspan class="var">n</tspan><tspan class="plain">) {</tspan>
+    </text>
+    <text x="20" y="172">
+      <tspan class="var">    result</tspan><tspan class="plain">.</tspan><tspan class="fn">push</tspan><tspan class="plain">(</tspan><tspan class="var">a</tspan><tspan class="plain">);</tspan>
+    </text>
+    <text x="20" y="192">
+      <tspan class="plain">    [</tspan><tspan class="var">a</tspan><tspan class="plain">, </tspan><tspan class="var">b</tspan><tspan class="plain">] = [</tspan><tspan class="var">b</tspan><tspan class="plain">, </tspan><tspan class="var">a</tspan><tspan class="plain"> + </tspan><tspan class="var">b</tspan><tspan class="plain">];</tspan>
+    </text>
+    <text x="20" y="212">
+      <tspan class="plain">  }</tspan>
+    </text>
+    <text x="20" y="232">
+      <tspan class="keyword">  return </tspan><tspan class="var">result</tspan><tspan class="plain">;</tspan>
+    </text>
+    <text x="20" y="252">
+      <tspan class="plain">}</tspan>
+    </text>
+    <text x="20" y="285">
+      <tspan class="comment">  // fibonacci(100) → [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]</tspan>
+    </text>
+  </g>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PANEL 3 – Go                            -->
+  <!-- ═══════════════════════════════════════ -->
+  <g class="panel panel-3">
+    <text class="keyword" x="20" y="72">  package </text>
+    <text class="plain" x="95"  y="72">main</text>
+    <text x="20" y="112">
+      <tspan class="keyword">func </tspan><tspan class="fn">fibonacci</tspan><tspan class="plain">(</tspan><tspan class="var">n </tspan><tspan class="type">int</tspan><tspan class="plain">) []</tspan><tspan class="type">int</tspan><tspan class="plain"> {</tspan>
+    </text>
+    <text x="20" y="132">
+      <tspan class="var">  result </tspan><tspan class="plain">:= []</tspan><tspan class="type">int</tspan><tspan class="plain">{}</tspan>
+    </text>
+    <text x="20" y="152">
+      <tspan class="var">  a</tspan><tspan class="plain">, </tspan><tspan class="var">b </tspan><tspan class="plain">:= </tspan><tspan class="num">0</tspan><tspan class="plain">, </tspan><tspan class="num">1</tspan>
+    </text>
+    <text x="20" y="172">
+      <tspan class="keyword">  for </tspan><tspan class="var">a</tspan><tspan class="plain"> &lt; </tspan><tspan class="var">n </tspan><tspan class="plain">{</tspan>
+    </text>
+    <text x="20" y="192">
+      <tspan class="var">    result </tspan><tspan class="plain">= </tspan><tspan class="fn">append</tspan><tspan class="plain">(</tspan><tspan class="var">result</tspan><tspan class="plain">, </tspan><tspan class="var">a</tspan><tspan class="plain">)</tspan>
+    </text>
+    <text x="20" y="212">
+      <tspan class="var">    a</tspan><tspan class="plain">, </tspan><tspan class="var">b </tspan><tspan class="plain">= </tspan><tspan class="var">b</tspan><tspan class="plain">, </tspan><tspan class="var">a</tspan><tspan class="plain">+</tspan><tspan class="var">b</tspan>
+    </text>
+    <text x="20" y="232">
+      <tspan class="plain">  }</tspan>
+    </text>
+    <text x="20" y="252">
+      <tspan class="keyword">  return </tspan><tspan class="var">result</tspan>
+    </text>
+    <text x="20" y="272">
+      <tspan class="plain">}</tspan>
+    </text>
+  </g>
+</svg>
