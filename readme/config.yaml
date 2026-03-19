@@ -1,0 +1,87 @@
+project:
+  name: "readme-tabs-experiment"
+  description: "Exploring every technique to create tab-like content in a GitHub README."
+  github_pages_url: "https://tobiashochguertel.github.io/readme-tabs-experiment"
+  repository: "tobiashochguertel/readme-tabs-experiment"
+
+readme:
+  output: "README.md"
+  sections:
+    - type: header
+      source: sections/00-header.md
+    - type: details-accordion
+      anchor: "details-accordion"
+      tab_group: code-examples
+    - type: html-table
+      anchor: "html-table"
+      tab_group: screenshots
+    - type: animated-svg
+      anchor: "animated-svg"
+      tab_group: code-examples
+      output_svg: "tabs-animated.svg"
+    - type: interactive-link
+      anchor: "interactive-github-pages"
+      source: sections/04-interactive-pages.md
+    - type: summary-table
+
+pages:
+  title: "README Tabs Experiment — GitHub Pages Demo"
+  description: "Live interactive demo of tab techniques for GitHub README files."
+  output_dir: "docs"
+  theme:
+    primary_color: "#2563eb"
+    bg_color: "#0d1117"
+    surface_color: "#161b22"
+    text_color: "#e6edf3"
+    muted_color: "#8b949e"
+
+tab_groups:
+  code-examples:
+    title: "Code Examples — Fibonacci Sequence"
+    description: "The same algorithm in multiple languages."
+    tabs:
+      - id: python
+        label: "🐍 Python"
+        language: python
+        source: "tabs/code-examples/fibonacci.py"
+      - id: javascript
+        label: "🟨 JavaScript"
+        language: javascript
+        source: "tabs/code-examples/fibonacci.js"
+      - id: go
+        label: "🐹 Go"
+        language: go
+        source: "tabs/code-examples/fibonacci.go"
+      - id: rust
+        label: "🦀 Rust"
+        language: rust
+        source: "tabs/code-examples/fibonacci.rs"
+
+  screenshots:
+    title: "Taskbook — Screenshot Gallery"
+    description: "Screenshots from the taskbook CLI application."
+    tabs:
+      - id: board
+        label: "Board View"
+        image: "screenshots/taskbook.png"
+        description: "Organize tasks and notes into boards with priority levels and progress tracking."
+      - id: timeline
+        label: "Timeline"
+        image: "screenshots/timeline.png"
+        description: "View all items chronologically, grouped by date."
+      - id: journal
+        label: "Journal"
+        image: "screenshots/journal.png"
+        description: "A detailed journal of all activity with timestamps."
+      - id: commands
+        label: "Commands"
+        image: "screenshots/commands.png"
+        description: "Access commands directly from the TUI with `/` or Tab."
+      - id: help
+        label: "Help"
+        image: "screenshots/help.png"
+        description: "Full keyboard shortcut reference available with `?`."
+      - id: archive
+        label: "Archive"
+        image: "screenshots/archive.png"
+        description: "Browse and restore deleted items."

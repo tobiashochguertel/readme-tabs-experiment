@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Interactive SVG — works when opened directly in a browser, NOT as <img> -->
+<!-- GitHub strips <foreignObject> when rendering via <img> tags -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+     viewBox="0 0 820 520" width="820" height="520">
+  <foreignObject width="820" height="520">
+    <xhtml:div>
+      <xhtml:style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body, div.root {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          background: #0d1117;
+          color: #e6edf3;
+          width: 820px;
+          height: 520px;
+          overflow: hidden;
+        }
+        h3 { font-size: 1rem; padding: .75rem 1rem .25rem; color: #8b949e; }
+        /* Radio inputs hidden */
+        input[type=radio] { display: none; }
+        /* Tab bar */
+        .tab-bar { display: flex; background: #21262d; border-bottom: 1px solid #30363d; gap: 4px; padding: 6px 6px 0; }
+        .tab-bar label {
+          padding: 7px 16px;
+          border-radius: 6px 6px 0 0;
+          cursor: pointer;
+          color: #8b949e;
+          font-size: .85rem;
+          font-weight: 500;
+          border: 1px solid transparent;
+          border-bottom: none;
+          transition: background .1s;
+        }
+        .tab-bar label:hover { background: #30363d; color: #e6edf3; }
+        /* Panels */
+        .tab-panel { display: none; }
+        pre {
+          background: #1e1e1e;
+          padding: 1rem 1.25rem;
+          font-family: "Fira Code", "Cascadia Code", ui-monospace, monospace;
+          font-size: .8rem;
+          line-height: 1.6;
+          overflow: auto;
+          height: 400px;
+          margin: 0;
+        }
+        /* Active tab per group */
+
+        #itab-python:checked ~ .tab-bar label[for="itab-python"] {
+          background: #2563eb; color: #fff; border-color: #30363d;
+        }
+        #itab-python:checked ~ .tab-panels .panel-python { display: block; }
+
+        #itab-javascript:checked ~ .tab-bar label[for="itab-javascript"] {
+          background: #2563eb; color: #fff; border-color: #30363d;
+        }
+        #itab-javascript:checked ~ .tab-panels .panel-javascript { display: block; }
+
+        #itab-go:checked ~ .tab-bar label[for="itab-go"] {
+          background: #2563eb; color: #fff; border-color: #30363d;
+        }
+        #itab-go:checked ~ .tab-panels .panel-go { display: block; }
+
+        #itab-rust:checked ~ .tab-bar label[for="itab-rust"] {
+          background: #2563eb; color: #fff; border-color: #30363d;
+        }
+        #itab-rust:checked ~ .tab-panels .panel-rust { display: block; }
+
+      </xhtml:style>
+      <xhtml:div class="root">
+        <xhtml:h3>💡 Click a tab — this SVG uses CSS radio-button tabs via &lt;foreignObject&gt;</xhtml:h3>
+
+        <xhtml:input type="radio" id="itab-python" name="itabs" checked="checked"/>
+
+        <xhtml:input type="radio" id="itab-javascript" name="itabs"/>
+
+        <xhtml:input type="radio" id="itab-go" name="itabs"/>
+
+        <xhtml:input type="radio" id="itab-rust" name="itabs"/>
+
+        <xhtml:div class="tab-bar">
+
+          <xhtml:label for="itab-python">🐍 Python</xhtml:label>
+
+          <xhtml:label for="itab-javascript">🟨 JavaScript</xhtml:label>
+
+          <xhtml:label for="itab-go">🐹 Go</xhtml:label>
+
+          <xhtml:label for="itab-rust">🦀 Rust</xhtml:label>
+
+        </xhtml:div>
+        <xhtml:div class="tab-panels">
+
+          <xhtml:div class="tab-panel panel-python">
+            <xhtml:pre># Fibonacci sequence
+def fibonacci(n: int) -&gt; list[int]:
+    a, b = 0, 1
+    result = []
+    while a &lt; n:
+        result.append(a)
+        a, b = b, a + b
+    return result
+
+print(fibonacci(100))
+# [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+</xhtml:pre>
+          </xhtml:div>
+
+          <xhtml:div class="tab-panel panel-javascript">
+            <xhtml:pre>// Fibonacci sequence
+function fibonacci(n) {
+  const result = [];
+  let [a, b] = [0, 1];
+  while (a &lt; n) {
+    result.push(a);
+    [a, b] = [b, a + b];
+  }
+  return result;
+}
+
+console.log(fibonacci(100));
+// [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+</xhtml:pre>
+          </xhtml:div>
+
+          <xhtml:div class="tab-panel panel-go">
+            <xhtml:pre>package main
+
+import &#34;fmt&#34;
+
+func fibonacci(n int) []int {
+	result := []int{}
+	a, b := 0, 1
+	for a &lt; n {
+		result = append(result, a)
+		a, b = b, a+b
+	}
+	return result
+}
+
+func main() {
+	fmt.Println(fibonacci(100))
+	// [0 1 1 2 3 5 8 13 21 34 55 89]
+}
+</xhtml:pre>
+          </xhtml:div>
+
+          <xhtml:div class="tab-panel panel-rust">
+            <xhtml:pre>// Fibonacci sequence
+fn fibonacci(n: u64) -&gt; Vec&lt;u64&gt; {
+    let mut result = Vec::new();
+    let (mut a, mut b) = (0u64, 1u64);
+    while a &lt; n {
+        result.push(a);
+        (a, b) = (b, a + b);
+    }
+    result
+}
+
+fn main() {
+    println!(&#34;{:?}&#34;, fibonacci(100));
+    // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+}
+</xhtml:pre>
+          </xhtml:div>
+
+        </xhtml:div>
+      </xhtml:div>
+    </xhtml:div>
+  </foreignObject>
+</svg>

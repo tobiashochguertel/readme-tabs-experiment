@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>readme-tabs-experiment — GitHub Pages Demo</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #21262d;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --code-bg: #1e1e1e;
+      --tab-radius: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    header {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+    header h1 { font-size: 2rem; margin-bottom: .5rem; }
+    header p { color: var(--muted); }
+    header a { color: var(--primary); text-decoration: none; }
+    header a:hover { text-decoration: underline; }
+    main { max-width: 900px; margin: 0 auto; }
+    section { margin-bottom: 3rem; }
+    h2 { font-size: 1.4rem; margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
+    h3 { font-size: 1.1rem; color: var(--muted); margin-bottom: .75rem; }
+    p  { color: var(--muted); margin-bottom: 1rem; }
+
+    /* ── TABS ── */
+    .tab-widget { background: var(--surface); border: 1px solid var(--border); border-radius: var(--tab-radius); overflow: hidden; }
+    .tab-widget input[type=radio] { display: none; }
+    .tab-bar { display: flex; background: var(--surface2); border-bottom: 1px solid var(--border); gap: 4px; padding: 6px 6px 0; }
+    .tab-bar label {
+      padding: 8px 18px;
+      border-radius: 6px 6px 0 0;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 500;
+      transition: background .15s, color .15s;
+      border: 1px solid transparent;
+      border-bottom: none;
+      user-select: none;
+    }
+    .tab-bar label:hover { background: var(--border); color: var(--text); }
+    .tab-panels { padding: 0; }
+    .tab-panel { display: none; }
+
+
+
+    #code-examples-python:checked ~ .tab-bar label[for="code-examples-python"] {
+      background: var(--primary); color: #fff; border-color: var(--border);
+    }
+    #code-examples-python:checked ~ .tab-panels .panel-python { display: block; }
+
+    #code-examples-javascript:checked ~ .tab-bar label[for="code-examples-javascript"] {
+      background: var(--primary); color: #fff; border-color: var(--border);
+    }
+    #code-examples-javascript:checked ~ .tab-panels .panel-javascript { display: block; }
+
+    #code-examples-go:checked ~ .tab-bar label[for="code-examples-go"] {
+      background: var(--primary); color: #fff; border-color: var(--border);
+    }
+    #code-examples-go:checked ~ .tab-panels .panel-go { display: block; }
+
+    #code-examples-rust:checked ~ .tab-bar label[for="code-examples-rust"] {
+      background: var(--primary); color: #fff; border-color: var(--border);
+    }
+    #code-examples-rust:checked ~ .tab-panels .panel-rust { display: block; }
+
+
+
+    #screenshots-board:checked ~ .tab-bar label[for="screenshots-board"] {
+      background: var(--primary); color: #fff; border-color: var(--border);
+    }
+    #screenshots-board:checked ~ .tab-panels .panel-board { display: block; }
+
+    #screenshots-timeline:checked ~ .tab-bar label[for="screenshots-timeline"] {
+      background: var(--primary); color: #fff; border-color: var(--border);
+    }
+    #screenshots-timeline:checked ~ .tab-panels .panel-timeline { display: block; }
+
+    #screenshots-journal:checked ~ .tab-bar label[for="screenshots-journal"] {
+      background: var(--primary); color: #fff; border-color: var(--border);
+    }
+    #screenshots-journal:checked ~ .tab-panels .panel-journal { display: block; }
+
+    #screenshots-commands:checked ~ .tab-bar label[for="screenshots-commands"] {
+      background: var(--primary); color: #fff; border-color: var(--border);
+    }
+    #screenshots-commands:checked ~ .tab-panels .panel-commands { display: block; }
+
+    #screenshots-help:checked ~ .tab-bar label[for="screenshots-help"] {
+      background: var(--primary); color: #fff; border-color: var(--border);
+    }
+    #screenshots-help:checked ~ .tab-panels .panel-help { display: block; }
+
+    #screenshots-archive:checked ~ .tab-bar label[for="screenshots-archive"] {
+      background: var(--primary); color: #fff; border-color: var(--border);
+    }
+    #screenshots-archive:checked ~ .tab-panels .panel-archive { display: block; }
+
+
+
+    /* ── CODE ── */
+    pre {
+      background: var(--code-bg);
+      padding: 1.25rem 1.5rem;
+      overflow-x: auto;
+      font-family: "Fira Code", "Cascadia Code", ui-monospace, monospace;
+      font-size: .85rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    code { font-family: inherit; }
+
+    /* ── GALLERY ── */
+    .gallery-img { max-width: 100%; display: block; border-radius: 4px; }
+    .img-caption  { padding: 1rem 1.25rem; color: var(--muted); font-size: .9rem; }
+
+    /* ── TECHNIQUE TABLE ── */
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    th, td { padding: .6rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: var(--surface2); color: var(--text); }
+    td { color: var(--muted); }
+    .yes { color: #3fb950; }
+    .no  { color: #f85149; }
+
+    /* ── INTERACTIVE SVG SECTION ── */
+    .svg-link-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--tab-radius);
+      padding: 1.5rem;
+    }
+    .svg-link-card a { color: var(--primary); font-size: 1rem; font-weight: 600; }
+    .svg-link-card p { margin-top: .5rem; font-size: .85rem; }
+
+    footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .8rem; text-align: center; }
+    footer a { color: var(--primary); }
+  </style>
+</head>
+<body>
+<header>
+  <h1>readme-tabs-experiment</h1>
+  <p>Exploring every technique to create tab-like content in a GitHub README.</p>
+  <p style="margin-top:.5rem">
+    <a href="https://github.com/tobiashochguertel/readme-tabs-experiment">GitHub Repository</a> ·
+    <a href="https://github.com/tobiashochguertel/readme-tabs-experiment/blob/main/README.md">README.md source</a>
+  </p>
+</header>
+
+<main>
+
+  <!-- ① details / summary -->
+  <section id="details-accordion">
+    <h2>① <code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code> — Collapsible Accordion</h2>
+    <p>Works directly on github.com — click to expand, content is fully copyable.</p>
+    <div style="display:flex;flex-direction:column;gap:.5rem">
+
+      <details style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.75rem 1rem">
+        <summary style="cursor:pointer;font-weight:600;list-style:none;display:flex;align-items:center;gap:.5rem">
+          🐍 Python
+        </summary>
+        <pre><code class="language-python"># Fibonacci sequence
+def fibonacci(n: int) -&gt; list[int]:
+    a, b = 0, 1
+    result = []
+    while a &lt; n:
+        result.append(a)
+        a, b = b, a + b
+    return result
+
+print(fibonacci(100))
+# [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+</code></pre>
+      </details>
+
+      <details style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.75rem 1rem">
+        <summary style="cursor:pointer;font-weight:600;list-style:none;display:flex;align-items:center;gap:.5rem">
+          🟨 JavaScript
+        </summary>
+        <pre><code class="language-javascript">// Fibonacci sequence
+function fibonacci(n) {
+  const result = [];
+  let [a, b] = [0, 1];
+  while (a &lt; n) {
+    result.push(a);
+    [a, b] = [b, a + b];
+  }
+  return result;
+}
+
+console.log(fibonacci(100));
+// [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+</code></pre>
+      </details>
+
+      <details style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.75rem 1rem">
+        <summary style="cursor:pointer;font-weight:600;list-style:none;display:flex;align-items:center;gap:.5rem">
+          🐹 Go
+        </summary>
+        <pre><code class="language-go">package main
+
+import &#34;fmt&#34;
+
+func fibonacci(n int) []int {
+	result := []int{}
+	a, b := 0, 1
+	for a &lt; n {
+		result = append(result, a)
+		a, b = b, a+b
+	}
+	return result
+}
+
+func main() {
+	fmt.Println(fibonacci(100))
+	// [0 1 1 2 3 5 8 13 21 34 55 89]
+}
+</code></pre>
+      </details>
+
+      <details style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.75rem 1rem">
+        <summary style="cursor:pointer;font-weight:600;list-style:none;display:flex;align-items:center;gap:.5rem">
+          🦀 Rust
+        </summary>
+        <pre><code class="language-rust">// Fibonacci sequence
+fn fibonacci(n: u64) -&gt; Vec&lt;u64&gt; {
+    let mut result = Vec::new();
+    let (mut a, mut b) = (0u64, 1u64);
+    while a &lt; n {
+        result.push(a);
+        (a, b) = (b, a + b);
+    }
+    result
+}
+
+fn main() {
+    println!(&#34;{:?}&#34;, fibonacci(100));
+    // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+}
+</code></pre>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- ② CSS radio-button tabs (code) -->
+  <section id="css-tabs">
+    <h2>② CSS Radio-Button Tabs — Code Examples <span style="color:#3fb950;font-size:.8em">✅ interactive here</span></h2>
+    <p>This technique requires <code>&lt;style&gt;</code> — stripped on github.com, works here.</p>
+    <div class="tab-widget">
+
+      <input type="radio" id="code-examples-python" name="code-examples" checked>
+
+      <input type="radio" id="code-examples-javascript" name="code-examples">
+
+      <input type="radio" id="code-examples-go" name="code-examples">
+
+      <input type="radio" id="code-examples-rust" name="code-examples">
+
+      <div class="tab-bar">
+
+        <label for="code-examples-python">🐍 Python</label>
+
+        <label for="code-examples-javascript">🟨 JavaScript</label>
+
+        <label for="code-examples-go">🐹 Go</label>
+
+        <label for="code-examples-rust">🦀 Rust</label>
+
+      </div>
+      <div class="tab-panels">
+
+        <div class="tab-panel panel-python">
+          <pre><code># Fibonacci sequence
+def fibonacci(n: int) -&gt; list[int]:
+    a, b = 0, 1
+    result = []
+    while a &lt; n:
+        result.append(a)
+        a, b = b, a + b
+    return result
+
+print(fibonacci(100))
+# [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+</code></pre>
+        </div>
+
+        <div class="tab-panel panel-javascript">
+          <pre><code>// Fibonacci sequence
+function fibonacci(n) {
+  const result = [];
+  let [a, b] = [0, 1];
+  while (a &lt; n) {
+    result.push(a);
+    [a, b] = [b, a + b];
+  }
+  return result;
+}
+
+console.log(fibonacci(100));
+// [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+</code></pre>
+        </div>
+
+        <div class="tab-panel panel-go">
+          <pre><code>package main
+
+import &#34;fmt&#34;
+
+func fibonacci(n int) []int {
+	result := []int{}
+	a, b := 0, 1
+	for a &lt; n {
+		result = append(result, a)
+		a, b = b, a+b
+	}
+	return result
+}
+
+func main() {
+	fmt.Println(fibonacci(100))
+	// [0 1 1 2 3 5 8 13 21 34 55 89]
+}
+</code></pre>
+        </div>
+
+        <div class="tab-panel panel-rust">
+          <pre><code>// Fibonacci sequence
+fn fibonacci(n: u64) -&gt; Vec&lt;u64&gt; {
+    let mut result = Vec::new();
+    let (mut a, mut b) = (0u64, 1u64);
+    while a &lt; n {
+        result.push(a);
+        (a, b) = (b, a + b);
+    }
+    result
+}
+
+fn main() {
+    println!(&#34;{:?}&#34;, fibonacci(100));
+    // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+}
+</code></pre>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ Screenshot gallery tabs -->
+  <section id="screenshot-tabs">
+    <h2>③ Screenshot Gallery Tabs <span style="color:#3fb950;font-size:.8em">✅ interactive here</span></h2>
+    <p>Taskbook CLI screenshots shown in interactive tabs — impossible on github.com without JS/CSS.</p>
+    <div class="tab-widget">
+
+      <input type="radio" id="screenshots-board" name="screenshots" checked>
+
+      <input type="radio" id="screenshots-timeline" name="screenshots">
+
+      <input type="radio" id="screenshots-journal" name="screenshots">
+
+      <input type="radio" id="screenshots-commands" name="screenshots">
+
+      <input type="radio" id="screenshots-help" name="screenshots">
+
+      <input type="radio" id="screenshots-archive" name="screenshots">
+
+      <div class="tab-bar">
+
+        <label for="screenshots-board">Board View</label>
+
+        <label for="screenshots-timeline">Timeline</label>
+
+        <label for="screenshots-journal">Journal</label>
+
+        <label for="screenshots-commands">Commands</label>
+
+        <label for="screenshots-help">Help</label>
+
+        <label for="screenshots-archive">Archive</label>
+
+      </div>
+      <div class="tab-panels">
+
+        <div class="tab-panel panel-board">
+          <img class="gallery-img" src="screenshots/taskbook.png" alt="Board View"/>
+          <p class="img-caption">Organize tasks and notes into boards with priority levels and progress tracking.</p>
+        </div>
+
+        <div class="tab-panel panel-timeline">
+          <img class="gallery-img" src="screenshots/timeline.png" alt="Timeline"/>
+          <p class="img-caption">View all items chronologically, grouped by date.</p>
+        </div>
+
+        <div class="tab-panel panel-journal">
+          <img class="gallery-img" src="screenshots/journal.png" alt="Journal"/>
+          <p class="img-caption">A detailed journal of all activity with timestamps.</p>
+        </div>
+
+        <div class="tab-panel panel-commands">
+          <img class="gallery-img" src="screenshots/commands.png" alt="Commands"/>
+          <p class="img-caption">Access commands directly from the TUI with `/` or Tab.</p>
+        </div>
+
+        <div class="tab-panel panel-help">
+          <img class="gallery-img" src="screenshots/help.png" alt="Help"/>
+          <p class="img-caption">Full keyboard shortcut reference available with `?`.</p>
+        </div>
+
+        <div class="tab-panel panel-archive">
+          <img class="gallery-img" src="screenshots/archive.png" alt="Archive"/>
+          <p class="img-caption">Browse and restore deleted items.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ Interactive SVG -->
+  <section id="interactive-svg">
+    <h2>④ Interactive SVG via <code>&lt;foreignObject&gt;</code></h2>
+    <p>
+      An SVG file with embedded HTML+CSS. Works when opened directly in a browser.
+      GitHub strips <code>&lt;foreignObject&gt;</code> when rendering SVGs via <code>&lt;img&gt;</code> tags.
+    </p>
+    <div class="svg-link-card">
+      <a href="interactive-tabs.svg" target="_blank">→ Open interactive-tabs.svg directly</a>
+      <p>Click the link above to open the SVG in a new tab. The tabs are fully clickable.</p>
+    </div>
+    <br/>
+    <p>Also try the animated version (works as a GitHub README <code>&lt;img&gt;</code>):</p>
+    <img src="animated-preview.svg" alt="Animated tabs" style="max-width:100%;border-radius:8px"/>
+  </section>
+
+  <!-- Summary table -->
+  <section id="summary">
+    <h2>Summary</h2>
+    <table>
+      <tr><th>Technique</th><th>github.com</th><th>GitHub Pages</th><th>Copy-paste</th></tr>
+      <tr><td><code>&lt;details&gt;/&lt;summary&gt;</code></td><td class="yes">✅</td><td class="yes">✅</td><td class="yes">✅</td></tr>
+      <tr><td>HTML <code>&lt;table&gt;</code></td><td class="yes">✅</td><td class="yes">✅</td><td class="yes">✅</td></tr>
+      <tr><td>Animated SVG</td><td class="yes">✅</td><td class="yes">✅</td><td class="no">❌</td></tr>
+      <tr><td>CSS radio-button tabs</td><td class="no">❌</td><td class="yes">✅</td><td class="yes">✅</td></tr>
+      <tr><td>JS tabs</td><td class="no">❌</td><td class="yes">✅</td><td class="yes">✅</td></tr>
+      <tr><td>SVG <code>&lt;foreignObject&gt;</code></td><td class="no">❌ stripped</td><td class="yes">✅</td><td class="yes">✅</td></tr>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  <a href="https://github.com/tobiashochguertel/readme-tabs-experiment">tobiashochguertel/readme-tabs-experiment</a>
+  · Generated by <code>scripts/generate_html.py</code>
+</footer>
+</body>
+</html>

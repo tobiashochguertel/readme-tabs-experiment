@@ -1,0 +1,58 @@
+name: Generate README
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "readme/**"
+      - "screenshots/**"
+      - "scripts/generate_readme.py"
+      - "scripts/generate_svg.py"
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    name: Generate README.md & animated SVG
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: "latest"
+
+      - name: Install Python 3.13
+        run: uv python install 3.13
+
+      - name: Generate animated SVG
+        run: |
+          uv run --script scripts/generate_svg.py \
+            --tab-group code-examples \
+            --output tabs-animated.svg
+
+      - name: Generate README.md
+        run: uv run --script scripts/generate_readme.py
+
+      - name: Commit generated files
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md tabs-animated.svg
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: regenerate README and SVG from readme/ sources [skip ci]
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+            git push
+          fi
